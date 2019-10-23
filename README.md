@@ -4,8 +4,9 @@
  * @Email: pisenliang@gmail.com
  * @Date: 2019-06-17 15:38:23
  * @LastEditors: PiPi
- * @LastEditTime: 2019-10-09 14:00:32
+ * @LastEditTime: 2019-10-23 14:12:44
  -->
+ Amx-1.x 这里是amx 1.x 版本，由于amx 2.x 版本将进行比较大的扩展在此设立amx 1.x 的版本控制，为使用1.x版本的用户服务。
 # 全局状态管理 Amx.js
 Amx.js是一个用纯JavaScript编写的全局状态管理，主要为解决页面或组件之间状态共享、管理等问题。
 Amx第一版组要支持vue，还在编写过程中。
