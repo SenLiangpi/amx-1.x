@@ -4,7 +4,7 @@
  * @Email: pisenliang@gmail.com
  * @Date: 2019-06-17 15:38:23
  * @LastEditors: PiPi
- * @LastEditTime: 2019-10-31 14:16:52
+ * @LastEditTime: 2019-11-01 15:10:11
  -->
  Amx-1.x 这里是amx 1.x 版本，由于amx 2.x 版本将进行比较大的扩展在此设立amx 1.x 的版本控制，为使用1.x版本的用户服务。
 # 全局状态管理 Amx.js
@@ -20,6 +20,8 @@ github : https://github.com/SenLiangpi/Amx
 
 1.2.1版本可以与Android和ios配合使用，app直接改变key对应的值就可以动态的改变web端的页面
 具体使用请与app端协商
+
+![image](https://github.com/SenLiangpi/demo/blob/master/ezgif-2-7adee262dd69.gif)
 
 # 用法
 安装npm i vue-amx
