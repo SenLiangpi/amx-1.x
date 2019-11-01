@@ -4,7 +4,7 @@
  * @Email: pisenliang@gmail.com
  * @Date: 2019-06-17 15:37:41
  * @LastEditors: PiPi
- * @LastEditTime: 2019-10-31 09:29:13
+ * @LastEditTime: 2019-10-31 17:31:21
  */
 // localStorage 写入操作 监听
 let orignalSetItem = localStorage.setItem;
@@ -32,7 +32,6 @@ window.addEventListener('storage', (e) => {
 })
 //监听 localStorage 写入
 window.addEventListener("setItemEvent", (e) => {
-  // console.log(e)
   if(JSON.stringify(window.amx[e.key]) != e.newValue){
     try {
       window.amx[e.key] = recursion(JSON.parse(e.newValue),function () {
@@ -171,7 +170,7 @@ Toast.read = function (key) {
     mounted() {
       window.addEventListener('storage', (e) => {
         if (e.key == key) {
-          this[key] = window.amx[key]
+          this[e.key] = window.amx[e.key]
         }
       })
     }

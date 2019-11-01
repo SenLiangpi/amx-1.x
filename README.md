@@ -4,12 +4,12 @@
  * @Email: pisenliang@gmail.com
  * @Date: 2019-06-17 15:38:23
  * @LastEditors: PiPi
- * @LastEditTime: 2019-10-23 14:12:44
+ * @LastEditTime: 2019-10-31 14:16:52
  -->
  Amx-1.x 这里是amx 1.x 版本，由于amx 2.x 版本将进行比较大的扩展在此设立amx 1.x 的版本控制，为使用1.x版本的用户服务。
 # 全局状态管理 Amx.js
-Amx.js是一个用纯JavaScript编写的全局状态管理，主要为解决页面或组件之间状态共享、管理等问题。
-Amx第一版组要支持vue，还在编写过程中。
+Amx.js是一个用纯JavaScript编写的全局状态管理，主要为解决页面或组件之间的数据共享。
+<!-- Amx第一版组要支持vue，还在编写过程中。 -->
 
 支持Amx技术：
 * Storage - 浏览器提供的Storage关系型数据存储。
@@ -115,32 +115,23 @@ github : https://github.com/SenLiangpi/Amx
 * Vue.use(vueamx,store) 写入数据，在初始化时写入
 ```javascript
 //写入格式为数组json
-let video = {
-  name: 'video',//唯一标识，不可以重复
-  type: false,//是否更新，如果更新，页面关闭在打开或者开启新页面数据就会变为初始化的值
-  store: {//存储的数据，json
-    a:4,
-    b:5,
-    c:6
+let store = {
+  data:{
+    a:{a:1,b:2,c:3}
+  },
+  tData:{
+    b:{a:1,b:2,c:3}
   }
 }
-let store = [home,video]
 Vue.use(vueamx,store)
 ```
 * Amx.read("name") 读取写入的值
 ```javascript
-mixins: [Amx.read("name"),Amx.read("name1")], //返回一个json
-```
-* Amx.allData() 读出所有数据仅限 data 永久存储数据
-```javascript
-// db就相对与你存入 data 永久存储中的所有值 所以 db = {a:{a:1,b:2,c:3}},你可以直接使用这个值也可以改变这些值
-let db = Amx.allData()
-/*
- * 我们在这里进行了数据监听，当你改变数据在数据存储点也会动态改变，vue页面中的a.a数据也会动态的变为11
- * 你可以很简单在vue框架之外使用数据和改这些数据，数据也会随着你的改变在vue中动态的改变
- * 请享受这个过程
- */
-db.a.a = 11
+mixins: [Amx.read("name"),Amx.read("name1")], 
+//返回一个json 当你调用这个方法时 传入的key 对应的数据不仅会再写入进vue 而且还会写入到内存中
+//使用方法
+window.amx.name.a ++
+// window.amx 的数据和vue是双向绑定的，而window.amx是全局的你可以再任何位置使用它 而它的数据产生变化时 vue中的数据和本地存储的数据也会实时变化
 ```
 * Amx.delete(['video','home']) 删除
 ```javascript
