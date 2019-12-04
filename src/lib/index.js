@@ -4,7 +4,7 @@
  * @Email: pisenliang@gmail.com
  * @Date: 2019-06-17 15:37:41
  * @LastEditors: PiPi
- * @LastEditTime: 2019-11-13 14:07:24
+ * @LastEditTime: 2019-12-04 10:34:59
  */
 // localStorage 写入操作 监听
 let orignalSetItem = localStorage.setItem;
@@ -32,7 +32,6 @@ window.addEventListener('storage', (e) => {
 })
 //监听 localStorage 写入
 window.addEventListener("setItemEvent", (e) => {
-  // console.log(e)
   if(JSON.stringify(window.amx[e.key]) != e.newValue){
     try {
       window.amx[e.key] = recursion(JSON.parse(e.newValue),function () {
@@ -66,12 +65,11 @@ function recursion(obj, Callback) {
         }
       })
       try {
-        voType = request[o].constructor.name
+        if(o[a].constructor.name == 'Object'){
+          x(o[a],z[a])
+        }
       } catch (e) {
-        voType = ''
-      }
-      if (voType == 'Object') {
-        x(o[a], z[a])
+        console.log(e)
       }
     }
   }
@@ -154,29 +152,12 @@ Toast.install = function (Vue, todos) {
     }
   }
   window.amx = {}
-  // console.log((new Date().getTime()-timestamp))
 }
 
 Toast.read = function (key) {
-  // var timestamp=new Date().getTime()
-  // const type1 = localStorage.getItem(key), type2 = sessionStorage.getItem(key)
-  // let data = {}
   if (!window.amx[key]) {
     keyData(key)
   }
-  // data[key] = window.amx[key]
-  // let watch = {}
-  // watch[key] = {
-  //   handler(val, oldVal) {
-  //     if (type1) {
-  //       localStorage.setItem(key, JSON.stringify(val))
-  //     } else {
-  //       sessionStorage.setItem(key, JSON.stringify(val))
-  //     }
-  //   },
-  //   deep: true
-  // }
-  // console.log((new Date().getTime()-timestamp))
   return {
     data() {
       return window.amx
@@ -191,7 +172,6 @@ Toast.read = function (key) {
         }
       })
     },
-    // watch: watch
   }
 }
 
@@ -212,51 +192,4 @@ Toast.allDelete = function (type) {
   sessionStorage.clear()
   localStorage.clear()
 }
-// Toast.allData = function () {
-//   let storage = window.localStorage
-//   var request = {}
-//   for (var i = 0, len = storage.length; i < len; i++) {
-//     let key = storage.key(i)
-//     try {
-//       request[key] = JSON.parse(dataGet(key))
-//     } catch (e) {
-//       request[key] = dataGet(key)
-//     }
-//   }
-//   var back = {}
-//   for (let o in request) {
-//     let value = request[o], voType
-//     try {
-//       voType = request[o].constructor.name
-//     } catch (e) {
-//       voType = ''
-//     }
-//     if (voType == 'Object') {
-//       value = recursion(request[o], function () {
-//         if (localStorage.getItem(o)) {
-//           localStorage.setItem(o, JSON.stringify(back[o]))
-//         } else if (sessionStorage.getItem(todo)) {
-//           sessionStorage.setItem(o, JSON.stringify(back[o]))
-//         }
-//       })
-//     }
-
-//     Object.defineProperty(back, o, {
-//       enumerable: true,
-//       configurable: true,
-//       get: function () {
-//         return value
-//       },
-//       set: function (v) {
-//         value = v
-//         if (localStorage.getItem(o)) {
-//           localStorage.setItem(o, JSON.stringify(v))
-//         } else if (sessionStorage.getItem(todo)) {
-//           sessionStorage.setItem(o, JSON.stringify(v))
-//         }
-//       }
-//     })
-//   }
-//   return back
-// }
 export default Toast;
