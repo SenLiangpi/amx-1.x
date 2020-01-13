@@ -3,8 +3,8 @@
  * @Github: https://github.com/SenLiangpi
  * @Email: pisenliang@gmail.com
  * @Date: 2019-06-17 15:37:41
- * @LastEditors: PiPi
- * @LastEditTime: 2019-12-04 10:34:59
+ * @LastEditors  : PiPi
+ * @LastEditTime : 2020-01-13 12:04:58
  */
 // localStorage 写入操作 监听
 let orignalSetItem = localStorage.setItem;
@@ -90,7 +90,7 @@ function keyData(key) {
     voType = ''
   }
   if (voType == 'Object') {
-    value = recursion(value[key], function () {
+    value[key] = recursion(value[key], function () {
       if (localStorage.getItem(key)) {
         localStorage.setItem(key, JSON.stringify(window.amx[key]))
       } else if (sessionStorage.getItem(todo)) {
@@ -102,10 +102,10 @@ function keyData(key) {
     enumerable: true,
     configurable: true,
     get: function () {
-      return value
+      return value[key]
     },
     set: function (v) {
-      value = v
+      value[key] = v
       if (localStorage.getItem(key)) {
         localStorage.setItem(key, JSON.stringify(v))
       } else if (sessionStorage.getItem(todo)) {
