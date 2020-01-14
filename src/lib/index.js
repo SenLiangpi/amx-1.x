@@ -4,7 +4,7 @@
  * @Email: pisenliang@gmail.com
  * @Date: 2019-06-17 15:37:41
  * @LastEditors  : PiPi
- * @LastEditTime : 2020-01-13 12:04:58
+ * @LastEditTime : 2020-01-14 10:36:57
  */
 // localStorage 写入操作 监听
 let orignalSetItem = localStorage.setItem;
@@ -32,6 +32,7 @@ window.addEventListener('storage', (e) => {
 })
 //监听 localStorage 写入
 window.addEventListener("setItemEvent", (e) => {
+  // console.log(e)
   if(JSON.stringify(window.amx[e.key]) != e.newValue){
     try {
       window.amx[e.key] = recursion(JSON.parse(e.newValue),function () {
@@ -135,8 +136,7 @@ function dataGet(key) {
 }
 let Toast = {}
 Toast.install = function (Vue, todos) {
-  var timestamp = new Date().getTime()
-  let result = {}
+  window.amx = {}
   if (todos.data) {
     for (let todo in todos.data) {
       if (!localStorage.getItem(todo) && !sessionStorage.getItem(todo)) {
@@ -151,7 +151,6 @@ Toast.install = function (Vue, todos) {
       }
     }
   }
-  window.amx = {}
 }
 
 Toast.read = function (key) {
@@ -171,7 +170,7 @@ Toast.read = function (key) {
           this[e.key] = window.amx[e.key]
         }
       })
-    },
+    }
   }
 }
 
