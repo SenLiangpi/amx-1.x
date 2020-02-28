@@ -3,8 +3,8 @@
  * @Github: https://github.com/SenLiangpi
  * @Email: pisenliang@gmail.com
  * @Date: 2019-06-17 15:37:41
- * @LastEditors  : PiPi
- * @LastEditTime : 2020-01-14 14:45:17
+ * @LastEditors: PiPi
+ * @LastEditTime: 2020-02-28 13:56:37
  */
 // localStorage 写入操作 监听
 let orignalSetItem = localStorage.setItem;
@@ -73,7 +73,14 @@ function recursion(obj, Callback) {
       }
     }
   }
-  x(obj, num)
+  try {
+    if(obj.constructor.name == 'Object'){
+      x(obj, num)
+    }
+  } catch (e) {
+    // console.log(e)
+  }
+  // x(obj, num)
   return num
 }
 // 深度监听一个 localStorage
