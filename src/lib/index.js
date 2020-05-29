@@ -4,7 +4,7 @@
  * @Email: pisenliang@gmail.com
  * @Date: 2019-06-17 15:37:41
  * @LastEditors: PiPi
- * @LastEditTime: 2020-02-28 13:56:37
+ * @LastEditTime: 2020-03-19 12:43:02
  */
 // localStorage 写入操作 监听
 let orignalSetItem = localStorage.setItem;
@@ -22,7 +22,7 @@ window.addEventListener('storage', (e) => {
     window.amx[e.key] = recursion(JSON.parse(e.newValue),function () {
       if (localStorage.getItem(e.key)) {
         localStorage.setItem(e.key, JSON.stringify(window.amx[e.key]))
-      } else if (sessionStorage.getItem(todo)) {
+      } else if (sessionStorage.getItem(e.key)) {
         sessionStorage.setItem(e.key, JSON.stringify(window.amx[e.key]))
       }
     })
@@ -37,7 +37,7 @@ window.addEventListener("setItemEvent", (e) => {
       window.amx[e.key] = recursion(JSON.parse(e.newValue),function () {
         if (localStorage.getItem(e.key)) {
           localStorage.setItem(e.key, JSON.stringify(window.amx[e.key]))
-        } else if (sessionStorage.getItem(todo)) {
+        } else if (sessionStorage.getItem(e.key)) {
           sessionStorage.setItem(e.key, JSON.stringify(window.amx[e.key]))
         }
       })
@@ -69,7 +69,7 @@ function recursion(obj, Callback) {
           x(o[a],z[a])
         }
       } catch (e) {
-        console.log(e)
+        // console.log(e)
       }
     }
   }
@@ -80,7 +80,6 @@ function recursion(obj, Callback) {
   } catch (e) {
     // console.log(e)
   }
-  // x(obj, num)
   return num
 }
 // 深度监听一个 localStorage
@@ -100,7 +99,7 @@ function keyData(key) {
     value[key] = recursion(value[key], function () {
       if (localStorage.getItem(key)) {
         localStorage.setItem(key, JSON.stringify(window.amx[key]))
-      } else if (sessionStorage.getItem(todo)) {
+      } else if (sessionStorage.getItem(key)) {
         sessionStorage.setItem(key, JSON.stringify(window.amx[key]))
       }
     })
@@ -115,7 +114,7 @@ function keyData(key) {
       value[key] = v
       if (localStorage.getItem(key)) {
         localStorage.setItem(key, JSON.stringify(v))
-      } else if (sessionStorage.getItem(todo)) {
+      } else if (sessionStorage.getItem(key)) {
         sessionStorage.setItem(key, JSON.stringify(v))
       }
     }
@@ -172,7 +171,9 @@ Toast.read = function (key) {
     },
     mounted() {
       window.addEventListener('storage', (e) => {
+        console.log('1')
         if (e.key == key) {
+          console.log('2')
           this[e.key] = window.amx[e.key]
         }
       })
